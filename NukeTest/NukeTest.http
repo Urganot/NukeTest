@@ -1,0 +1,6 @@
+@NukeTest_HostAddress = http://localhost:5010
+
+GET {{NukeTest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
