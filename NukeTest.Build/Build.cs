@@ -94,7 +94,7 @@ class Build : NukeBuild
                     SonarScannerBegin(settings =>
                         settings
                             .SetProjectKey(configuration["SonarQube:ProjectKey"])
-                    //.SetServer(configuration["SonarQube:Server"])
+                            .SetServer(configuration["SonarQube:Server"])
                     );
                     SonarStartRanSuccessfully = true;
                 });
