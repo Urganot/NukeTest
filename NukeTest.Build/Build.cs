@@ -49,7 +49,8 @@ class Build : NukeBuild
         _ =>
             _.Executes(() =>
             {
-                DotNetToolRestore(settings => settings); // New settings necessary until bugfix is released
+                //DotNetToolRestore(new DotNetToolRestoreSettings()); // This works
+                DotNetToolRestore(); // This does not work
             });
 
     Target Lint =>
@@ -70,7 +71,7 @@ class Build : NukeBuild
 
                     DotNetBuild(settings =>
                         settings
-                            .SetProjectFile(Solution)
+                            .SetProjectFile(Solution.NukeTest_Build)
                             .SetConfiguration(Configuration)
                             .EnableNoRestore()
                     );
@@ -79,7 +80,6 @@ class Build : NukeBuild
     Target SonarStart =>
         _ =>
             _.DependsOn(ToolRestore)
-                .DependentFor(Compile)
                 .ProceedAfterFailure()
                 .Triggers(SonarEnd)
                 .Executes(() =>
